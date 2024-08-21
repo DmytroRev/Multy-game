@@ -1,0 +1,39 @@
+/* #game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.line {
+    position: absolute;
+    background-color: green;
+    height: 2px;
+    transform-origin: 0% 50%;
+    display: none;
+}
+
+.board {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+}
+
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+#status {
+    margin-bottom: 20px;
+}
+
+#reset {
+    margin-top: 20px;
+} */

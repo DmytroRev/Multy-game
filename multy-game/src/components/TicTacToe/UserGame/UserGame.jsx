@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import css from "./tic.module.css";
+import css from "./UserGame.module.css";
 const winningConditions = [
   [0, 1, 2],
   [3, 4, 5],
@@ -11,7 +11,7 @@ const winningConditions = [
   [2, 4, 6],
 ];
 
-export default function TicTacToe() {
+export default function UserGame() {
   const [board, setBoard] = useState(() => {
     const savedBoard = localStorage.getItem("Board");
     return savedBoard
