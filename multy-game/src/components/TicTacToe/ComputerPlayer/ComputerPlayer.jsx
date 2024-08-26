@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import css from "./ComputerPlayer.module.css";
 import ComputerLogic from "./ComputerLogic/ComputerLogic";
+import FirstPlayerChoise from "../FirstPlayerChoise/FirstPlayerChoise";
 const winningConditions = [
   [0, 1, 2],
   [3, 4, 5],
@@ -13,14 +14,33 @@ const winningConditions = [
 ];
 
 export default function ComputerPlayer() {
-  const [board, setBoard] = useState(() => {
-    const savedBoard = localStorage.getItem("Board");
-    return savedBoard ? JSON.parse(savedBoard) : Array(9).fill("");
-  });
+  const [board, setBoard] = useState(Array(9).fill(""));
   const [currentPlayer, setCurrentPlayer] = useState("X");
   const [gameActive, setGameActive] = useState(true);
   const [statusMessage, setStatusMessage] = useState("It's X's turn");
   const lineRef = useRef(null);
+  const [firstPlayerSelected, setFirstPlayerSelected] = useState(false);
+  const [firstPlayer, setFirstPlayer] = useState("X");
+
+  const drawWinningLine = useCallback((a, c) => {
+    const cellA = document.querySelector(`[data-index="${a}"]`);
+    const cellC = document.querySelector(`[data-index="${c}"]`);
+
+    const startX = cellA.offsetLeft + cellA.offsetWidth / 2;
+    const startY = cellA.offsetTop + cellA.offsetHeight / 2;
+    const endX = cellC.offsetLeft + cellC.offsetWidth / 2;
+    const endY = cellC.offsetTop + cellC.offsetHeight / 2;
+
+    const dx = endX - startX;
+    const dy = endY - startY;
+    const length = Math.sqrt(dx * dx + dy * dy);
+    const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
+
+    lineRef.current.style.width = `${length}px`;
+    lineRef.current.style.transform = `translate(${startX}px, ${startY}px) rotate(${angle}deg)`;
+    lineRef.current.style.transformOrigin = "0 0"; // Устанавливаем начало координат на левый верхний угол линии
+    lineRef.current.style.display = "block";
+  }, []);
 
   const checkForWin = useCallback(
     (newBoard) => {
@@ -43,7 +63,7 @@ export default function ComputerPlayer() {
         setStatusMessage("Game ended in a draw!");
       }
     },
-    [currentPlayer]
+    [currentPlayer, drawWinningLine]
   );
 
   const switchPlayer = useCallback(() => {
@@ -64,18 +84,6 @@ export default function ComputerPlayer() {
   }, [board, checkForWin, switchPlayer]);
 
   useEffect(() => {
-    localStorage.setItem("Board", JSON.stringify(board));
-  }, [board]);
-
-  useEffect(() => {
-    const savedLine = JSON.parse(localStorage.getItem("winningLine"));
-    if (savedLine) {
-      const [a, c] = savedLine;
-      drawWinningLine(a, c);
-    }
-  }, []);
-
-  useEffect(() => {
     if (currentPlayer === "O" && gameActive) {
       const timeoutId = setTimeout(() => {
         computerMove();
@@ -83,6 +91,17 @@ export default function ComputerPlayer() {
       return () => clearTimeout(timeoutId);
     }
   }, [currentPlayer, gameActive, computerMove]);
+
+  const handlePlayerSelect = (player) => {
+    setCurrentPlayer(player);
+    setFirstPlayer(player);
+    setFirstPlayerSelected(true);
+    setStatusMessage(`It's ${player}'s turn`);
+  };
+
+  if (!firstPlayerSelected) {
+    return <FirstPlayerChoise onPlayerSelect={handlePlayerSelect} />;
+  }
 
   const handleClick = (index) => {
     if (board[index] !== "" || !gameActive || currentPlayer === "O") return;
@@ -95,33 +114,27 @@ export default function ComputerPlayer() {
     switchPlayer();
   };
 
-  const drawWinningLine = (a, c) => {
-    const cellA = document.querySelector(`[data-index="${a}"]`);
-    const cellC = document.querySelector(`[data-index="${c}"]`);
-
-    const startX = cellA.offsetLeft + cellA.offsetWidth / 2;
-    const startY = cellA.offsetTop + cellA.offsetHeight / 2;
-    const endX = cellC.offsetLeft + cellC.offsetWidth / 2;
-    const endY = cellC.offsetTop + cellC.offsetHeight / 2;
-
-    const dx = endX - startX;
-    const dy = endY - startY;
-    const length = Math.sqrt(dx * dx + dy * dy);
-    const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
-
-    lineRef.current.style.width = `${length}px`;
-    lineRef.current.style.transform = `translate(${startX}px, ${startY}px) rotate(${angle}deg)`;
-    lineRef.current.style.display = "block";
-    localStorage.setItem("winningLine", JSON.stringify([a, c]));
-  };
-
   const resetGame = () => {
+    // Сбрасываем состояние доски и игрока
     setBoard(Array(9).fill(""));
-    setCurrentPlayer("X");
-    setGameActive(true);
-    setStatusMessage("It's X's turn");
-    lineRef.current.style.display = "none";
-    localStorage.removeItem("winningLine");
+    setCurrentPlayer(firstPlayer);
+    setGameActive(true); // Важно установить игру активной
+    setStatusMessage(`It's ${firstPlayer}'s turn`);
+
+    // Скрываем линию победы
+    if (lineRef.current) {
+      lineRef.current.style.display = "none";
+      lineRef.current.style.width = "0px";
+      lineRef.current.style.transform = "none";
+    }
+
+    // Если первый игрок — компьютер, выполняем его первый ход с задержкой
+    if (firstPlayer === "O") {
+      const timeoutId = setTimeout(() => {
+        computerMove();
+      }, 1000);
+      return () => clearTimeout(timeoutId);
+    }
   };
 
   return (

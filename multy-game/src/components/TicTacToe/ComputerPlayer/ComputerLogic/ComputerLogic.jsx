@@ -11,12 +11,7 @@ const winningConditions = [
 
 const checkWinner = (board, player) => {
   for (let [a, b, c] of winningConditions) {
-    if (
-      board[a] &&
-      board[a] === board[b] &&
-      board[a] === board[c] &&
-      board[a] === player
-    ) {
+    if (board[a] === player && board[a] === board[b] && board[a] === board[c]) {
       return true;
     }
   }

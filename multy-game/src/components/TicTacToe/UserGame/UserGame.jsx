@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import css from "./UserGame.module.css";
 const winningConditions = [
   [0, 1, 2],
@@ -12,29 +12,24 @@ const winningConditions = [
 ];
 
 export default function UserGame() {
-  const [board, setBoard] = useState(() => {
-    const savedBoard = localStorage.getItem("Board");
-    return savedBoard
-      ? JSON.parse(savedBoard)
-      : ["", "", "", "", "", "", "", "", ""];
-  });
+  const [board, setBoard] = useState(["", "", "", "", "", "", "", "", ""]);
 
   const [currentPlayer, setCurrentPlayer] = useState("X");
   const [gameActive, setGameActive] = useState(true);
   const [statusMessage, setStatusMessage] = useState("It's X's turn");
   const lineRef = useRef(null);
 
-  useEffect(() => {
-    localStorage.setItem("Board", JSON.stringify(board));
-  }, [board]);
+  // useEffect(() => {
+  //   localStorage.setItem("Board", JSON.stringify(board));
+  // }, [board]);
 
-  useEffect(() => {
-    const savedLine = JSON.parse(localStorage.getItem("winningLine"));
-    if (savedLine) {
-      const [a, c] = savedLine;
-      drawWinningLine(a, c);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const savedLine = JSON.parse(localStorage.getItem("winningLine"));
+  //   if (savedLine) {
+  //     const [a, c] = savedLine;
+  //     drawWinningLine(a, c);
+  //   }
+  // }, []);
   const handleClick = (index) => {
     if (board[index] !== "" || !gameActive) return;
 
@@ -90,7 +85,7 @@ export default function UserGame() {
     lineRef.current.style.width = `${length}px`;
     lineRef.current.style.transform = `translate(${startX}px, ${startY}px) rotate(${angle}deg)`;
     lineRef.current.style.display = "block";
-    localStorage.setItem("winningLine", JSON.stringify([a, c]));
+    // localStorage.setItem("winningLine", JSON.stringify([a, c]));
   };
 
   const resetGame = () => {
@@ -99,7 +94,7 @@ export default function UserGame() {
     setGameActive(true);
     setStatusMessage("It's X's turn");
     lineRef.current.style.display = "none";
-    localStorage.removeItem("winningLine");
+    // localStorage.removeItem("winningLine");
   };
   return (
     <div id={css.game}>
