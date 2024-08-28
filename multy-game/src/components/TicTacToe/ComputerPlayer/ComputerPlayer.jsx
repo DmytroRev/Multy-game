@@ -1,6 +1,5 @@
 const ComputerMove = (data, difficulty) => {
   if (isGameOver(data)) {
-    console.log("Game Over");
     return null;
   }
 

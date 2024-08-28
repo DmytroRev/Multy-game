@@ -3,6 +3,7 @@
     padding: 20px;
 }
 
+
 .back {
     background-color: #1f3540;
             border: none;
@@ -36,6 +37,8 @@ text-decoration: none;
     padding-left: 15px;
 }
 
+
+
 .reset {
     width: 190px;
     height: 80px;
@@ -64,6 +67,11 @@ margin-left: auto;
     border:  1px solid #0f1b21;
     border-radius: 12px;
     cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.boxes:hover{
+    background-color: #2b4c5a;
 }
 .board {
     /* height: 500px; */

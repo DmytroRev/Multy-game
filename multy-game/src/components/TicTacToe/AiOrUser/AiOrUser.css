@@ -1,15 +1,69 @@
-.first-move-btn {
+.select-mode {
+    display: flex;
+text-align: center;
+justify-content: center;
+gap: 20px;
+}
+
+.title-ai {
+    font-size: 18px;
+    font-weight: 300;
+color: white;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.mode-button,
+.difficulty-button,
+.first-move-button {
     padding: 10px 20px;
-    margin: 5px;
+    border: none;
+    background-color: #ddd;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: bacground-color 0.3s, background-color 0.3s;
+}
+
+.mode-button.active,
+.difficulty-button.active,
+.first-move-button.active {
+    background-color: #1f3540;
+    color: #26ffcb;
+    transition: bacground-color 0.3s, background-color 0.3s;
+}
+
+.mode-button:hover,
+.difficulty-button:hover,
+.first-move-button:hover {
+background-color: #2b4c5a;
+}
+
+.div {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.first-move-btn {
+    padding: 7.4px 20px;
     border: 2px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
     cursor: pointer;
     font-size: 16px;
+    transition: color 0.3s, background-color 0.3s;
 }
 
 .first-move-btn.selected {
-    border-color: #007bff;
-    background-color: #007bff;
+    border-color: #1f3540;
+    background-color: #1f3540;
+    color: #26ffcb;
+}
+
+.box {
     color: white;
 }

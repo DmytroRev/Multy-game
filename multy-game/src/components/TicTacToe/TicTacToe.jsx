@@ -50,37 +50,36 @@ const TicTacToe = () => {
     }
   }, []);
   useEffect(() => {
-    if (gameMode === "computer") {
-      if (firstMove === "computer" && count === 0) {
-        // Компьютер делает первый ход
-        const timeoutId = setTimeout(() => {
-          const move = ComputerPlayer(data, difficulty);
-          if (move !== null) {
-            const box = box_array[move];
-            box.current.innerHTML = `<img src='${circle_icon}'/>`;
-            data[move] = "o";
-            setCount(1);
-            checkWin();
-          }
-        }, 1000);
-        return () => clearTimeout(timeoutId);
-      } else if (count % 2 === 1) {
-        // Ход компьютера после игрока
-        const timeoutId = setTimeout(() => {
-          const move = ComputerPlayer(data, difficulty);
-          if (move !== null) {
-            const box = box_array[move];
-            box.current.innerHTML = `<img src='${circle_icon}'/>`;
-            data[move] = "o";
-            setCount((prevCount) => prevCount + 1);
-            checkWin();
-          }
-        }, 1000);
-        return () => clearTimeout(timeoutId);
-      }
+    if (gameMode === "computer" && count % 2 === 1 && !lock) {
+      const timeoutId = setTimeout(() => {
+        const move = ComputerPlayer(data, difficulty);
+        if (move !== null) {
+          const box = box_array[move];
+          box.current.innerHTML = `<img src='${circle_icon}'/>`;
+          data[move] = "o";
+          setCount((prevCount) => prevCount + 1);
+          checkWin();
+        }
+      }, 1000);
+      return () => clearTimeout(timeoutId);
     }
-  }, [gameMode, count, lock, difficulty, box_array, checkWin, firstMove]);
+  }, [gameMode, count, difficulty, box_array, checkWin, lock]);
 
+  useEffect(() => {
+    if (gameMode === "computer" && firstMove === "computer" && count === 0) {
+      const timeoutId = setTimeout(() => {
+        const move = ComputerPlayer(data, difficulty);
+        if (move !== null) {
+          const box = box_array[move];
+          box.current.innerHTML = `<img src='${circle_icon}'/>`;
+          data[move] = "o";
+          setCount(1);
+          checkWin();
+        }
+      }, 1000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [gameMode, count, difficulty, box_array, checkWin, firstMove]);
   const toggle = (e, num) => {
     if (lock || (gameMode === "computer" && count % 2 === 1)) {
       return;
@@ -124,6 +123,16 @@ const TicTacToe = () => {
     });
   };
 
+  // if (gameMode === "computer" && firstMove === "computer") {
+  //   setCount(0);
+  //   const move = ComputerPlayer(data, difficulty);
+  //   if (move !== null) {
+  //     const box = box_array[move];
+  //     box.current.innerHTML = `<img src='${circle_icon}'/>`;
+  //     data[move] = "o";
+  //     setCount(1);
+  //   }
+  // }
   return (
     <div className="container">
       <button type="button" className="back hover">
@@ -134,16 +143,16 @@ const TicTacToe = () => {
       <h1 className="title" ref={titleRef}>
         Tic Tac Toe Game in <span>React</span>
       </h1>
-
-      <AiOrUser
-        gameMode={gameMode}
-        setGameMode={setGameMode}
-        difficulty={difficulty}
-        setDifficulty={setDifficulty}
-        firstMove={firstMove}
-        setFirstMove={setFirstMove}
-      />
-
+      <div>
+        <AiOrUser
+          gameMode={gameMode}
+          setGameMode={setGameMode}
+          difficulty={difficulty}
+          setDifficulty={setDifficulty}
+          firstMove={firstMove}
+          setFirstMove={setFirstMove}
+        />
+      </div>
       <div className="board">
         <div className="row1">
           <div
