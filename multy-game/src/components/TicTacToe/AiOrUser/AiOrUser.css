@@ -1,0 +1,15 @@
+.first-move-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.first-move-btn.selected {
+    border-color: #007bff;
+    background-color: #007bff;
+    color: white;
+}

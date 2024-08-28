@@ -9,7 +9,7 @@ export default function Navigation() {
       </div>
       <ul>
         <li>
-          <NavLink to="/ticTacToe/select">Game</NavLink>
+          <NavLink to="/ticTacToe">Game</NavLink>
         </li>
       </ul>
     </div>

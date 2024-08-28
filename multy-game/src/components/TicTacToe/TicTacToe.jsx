@@ -1,13 +1,20 @@
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import circle_icon from "../../img/circle.png";
 import cross_icon from "../../img/cross.png";
 import "./TicTacToe.css";
+import { Link } from "react-router-dom";
+import AiOrUser from "./AiOrUser/AiOrUser";
+import ComputerPlayer from "./ComputerPlayer/ComputerPlayer";
 
 let data = ["", "", "", "", "", "", "", "", ""];
 
 const TicTacToe = () => {
   let [count, setCount] = useState(0);
   let [lock, setLock] = useState(false);
+  let [gameMode, setGameMode] = useState("");
+  let [difficulty, setDifficulty] = useState("easy");
+  let [firstMove, setFirstMove] = useState("player");
+
   let titleRef = useRef(null);
   let box1 = useRef(null);
   let box2 = useRef(null);
@@ -18,28 +25,12 @@ const TicTacToe = () => {
   let box7 = useRef(null);
   let box8 = useRef(null);
   let box9 = useRef(null);
-
-  let box_array = [box1, box2, box3, box4, box5, box6, box7, box8, box9];
-  const toggle = (e, num) => {
-    if (lock) {
-      return 0;
-    }
-
-    if (data[num] !== "") {
-      return;
-    }
-    if (count % 2 === 0) {
-      e.target.innerHTML = `<img src='${cross_icon}'/>`; // Исправлено scr на src
-      data[num] = "x";
-    } else {
-      e.target.innerHTML = `<img src='${circle_icon}'/>`; // Исправлено scr на src
-      data[num] = "o";
-    }
-    setCount(++count);
-    checkWin();
-  };
-
-  const checkWin = () => {
+  const backToPage = useRef(location.state ?? "/");
+  const box_array = useMemo(
+    () => [box1, box2, box3, box4, box5, box6, box7, box8, box9],
+    []
+  );
+  const checkWin = useCallback(() => {
     if (data[0] === data[1] && data[1] === data[2] && data[2] !== "") {
       won(data[2]);
     } else if (data[3] === data[4] && data[4] === data[5] && data[5] !== "") {
@@ -57,6 +48,58 @@ const TicTacToe = () => {
     } else if (data[2] === data[4] && data[4] === data[6] && data[6] !== "") {
       won(data[6]);
     }
+  }, []);
+  useEffect(() => {
+    if (gameMode === "computer") {
+      if (firstMove === "computer" && count === 0) {
+        // Компьютер делает первый ход
+        const timeoutId = setTimeout(() => {
+          const move = ComputerPlayer(data, difficulty);
+          if (move !== null) {
+            const box = box_array[move];
+            box.current.innerHTML = `<img src='${circle_icon}'/>`;
+            data[move] = "o";
+            setCount(1);
+            checkWin();
+          }
+        }, 1000);
+        return () => clearTimeout(timeoutId);
+      } else if (count % 2 === 1) {
+        // Ход компьютера после игрока
+        const timeoutId = setTimeout(() => {
+          const move = ComputerPlayer(data, difficulty);
+          if (move !== null) {
+            const box = box_array[move];
+            box.current.innerHTML = `<img src='${circle_icon}'/>`;
+            data[move] = "o";
+            setCount((prevCount) => prevCount + 1);
+            checkWin();
+          }
+        }, 1000);
+        return () => clearTimeout(timeoutId);
+      }
+    }
+  }, [gameMode, count, lock, difficulty, box_array, checkWin, firstMove]);
+
+  const toggle = (e, num) => {
+    if (lock || (gameMode === "computer" && count % 2 === 1)) {
+      return;
+    }
+
+    if (data[num] !== "") {
+      return;
+    }
+
+    if (count % 2 === 0) {
+      e.target.innerHTML = `<img src='${cross_icon}'/>`;
+      data[num] = "x";
+    } else {
+      e.target.innerHTML = `<img src='${circle_icon}'/>`;
+      data[num] = "o";
+    }
+
+    setCount((prevCount) => prevCount + 1);
+    checkWin();
   };
 
   const won = (winner) => {
@@ -71,16 +114,36 @@ const TicTacToe = () => {
   const reset = () => {
     setLock(false);
     data = ["", "", "", "", "", "", "", "", ""];
+    setCount(0);
     titleRef.current.innerHTML = "Tic Tac Toe in <span>React</span>";
-    box_array.map((e) => {
-      e.current.innerHTML = "";
+
+    box_array.forEach((box) => {
+      if (box.current) {
+        box.current.innerHTML = "";
+      }
     });
   };
+
   return (
     <div className="container">
+      <button type="button" className="back hover">
+        <Link to={backToPage.current} className="link">
+          Back
+        </Link>
+      </button>
       <h1 className="title" ref={titleRef}>
         Tic Tac Toe Game in <span>React</span>
       </h1>
+
+      <AiOrUser
+        gameMode={gameMode}
+        setGameMode={setGameMode}
+        difficulty={difficulty}
+        setDifficulty={setDifficulty}
+        firstMove={firstMove}
+        setFirstMove={setFirstMove}
+      />
+
       <div className="board">
         <div className="row1">
           <div
@@ -152,8 +215,9 @@ const TicTacToe = () => {
           ></div>
         </div>
       </div>
+
       <button
-        className="reset"
+        className="reset hover"
         onClick={() => {
           reset();
         }}

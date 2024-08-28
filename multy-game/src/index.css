@@ -5,4 +5,10 @@ body {
     margin: 0;
 background: #0f1b21;
 }
+h1 {
+    margin: 0;
+}
 
+.hover:hover {
+    background-color: #2b4c5a;
+}
