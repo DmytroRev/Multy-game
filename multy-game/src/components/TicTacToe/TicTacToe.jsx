@@ -14,6 +14,8 @@ const TicTacToe = () => {
   let [gameMode, setGameMode] = useState("");
   let [difficulty, setDifficulty] = useState("easy");
   let [firstMove, setFirstMove] = useState("player");
+  let [crossWins, setCrossWins] = useState(0);
+  let [circleWins, setCircleWins] = useState(0);
 
   let titleRef = useRef(null);
   let box1 = useRef(null);
@@ -60,7 +62,7 @@ const TicTacToe = () => {
           setCount((prevCount) => prevCount + 1);
           checkWin();
         }
-      }, 1000);
+      }, 500);
       return () => clearTimeout(timeoutId);
     }
   }, [gameMode, count, difficulty, box_array, checkWin, lock]);
@@ -76,7 +78,7 @@ const TicTacToe = () => {
           setCount(0);
           checkWin();
         }
-      }, 1000);
+      }, 500);
       return () => clearTimeout(timeoutId);
     }
   }, [gameMode, count, difficulty, box_array, checkWin, firstMove]);
@@ -105,7 +107,9 @@ const TicTacToe = () => {
     setLock(true);
     if (winner === "x") {
       titleRef.current.innerHTML = `Congrulatulations: <img src='${cross_icon}'/> wins`;
+      setCrossWins((prevCount) => prevCount + 1);
     } else {
+      setCircleWins((prevCount) => prevCount + 1);
       titleRef.current.innerHTML = `Congrulatulations: <img src='${circle_icon}'/> wins`;
     }
   };
@@ -143,7 +147,13 @@ const TicTacToe = () => {
           setFirstMove={setFirstMove}
         />
       </div>
+
       <div className="board">
+        <div className="container-for-count cross">
+          <img src={cross_icon} className="img-cross-contain" />
+          <span className="line"></span>
+          <p className="count">{crossWins}</p>
+        </div>
         <div className="row1">
           <div
             className="boxes"
@@ -212,6 +222,11 @@ const TicTacToe = () => {
               toggle(e, 8);
             }}
           ></div>
+        </div>
+        <div className="container-for-count circle">
+          <img src={circle_icon} className="img-cross-contain" />
+          <span className="line"></span>
+          <p className="count">{circleWins}</p>
         </div>
       </div>
 

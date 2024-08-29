@@ -1,6 +1,10 @@
 
 .container {
     padding: 20px;
+    background-image: linear-gradient(rgba(46, 47, 66, 0.7), rgba(46, 47, 66, 0.7)),url(../../img/background.jpg);
+                background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: cover;
 }
 
 
@@ -37,11 +41,69 @@ text-decoration: none;
     padding-left: 15px;
 }
 
+.container-design {
+    display: flex;
+    justify-content: space-between;
 
+}
+
+.container-for-count {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 80px;
+    height: 100px;
+    padding: 10px;
+    justify-content: center;
+    border: 1px solid #26ffcb;
+background: linear-gradient(rgba(0, 0, 0, 0.1),
+            /* Очень светлый затемняющий градиент */
+            rgba(0, 0, 0, 0.1)
+            /* Очень светлый затемняющий градиент */
+        );
+    box-shadow: 0 0 10px rgba(38, 255, 203, 0.8);
+    border-radius: 20px;
+    position: relative;
+    /* background: #2a2a2a; */
+}
+
+
+
+.cross {
+margin-top: 165px;
+margin-right: 30px;
+}
+
+.circle {
+margin-top: 165px;
+margin-left: 30px;
+}
+
+.img-cross-contain {
+    width: 60px;
+    height: 60px;
+}
+
+.line::before {
+    content: '';
+    position: absolute;
+    top: 72px;
+    left: 10px;
+    width: 80%;
+    height: 1px;
+    background-color: #26ffcb;
+    display: block;
+}
+
+.count {
+    color: #26ffcb;
+    height: 5px;
+}
 
 .reset {
-    width: 190px;
-    height: 80px;
+    width: 150px;
+    height: 60px;
     border: none;
     outline: none;
     cursor: pointer;
