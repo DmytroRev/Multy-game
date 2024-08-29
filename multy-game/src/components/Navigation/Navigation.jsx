@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
-
+import tictactoe_logo from "../../img/tictactoe_logo.jpg";
+import "./Navigation.css";
 export default function Navigation() {
   return (
     <div>
@@ -8,8 +9,17 @@ export default function Navigation() {
         <p>it`s launch game tools</p>
       </div>
       <ul>
-        <li>
-          <NavLink to="/ticTacToe">Game</NavLink>
+        <li className="card">
+          <NavLink to="/ticTacToe" className="card-link">
+            <div>
+              <img
+                className="tictactoe-logo"
+                src={tictactoe_logo}
+                alt="tic tac toe"
+              />
+            </div>
+            <span className="card-content">Play Game</span>
+          </NavLink>
         </li>
       </ul>
     </div>

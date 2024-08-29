@@ -73,7 +73,7 @@ const TicTacToe = () => {
           const box = box_array[move];
           box.current.innerHTML = `<img src='${circle_icon}'/>`;
           data[move] = "o";
-          setCount(1);
+          setCount(0);
           checkWin();
         }
       }, 1000);
@@ -123,16 +123,6 @@ const TicTacToe = () => {
     });
   };
 
-  // if (gameMode === "computer" && firstMove === "computer") {
-  //   setCount(0);
-  //   const move = ComputerPlayer(data, difficulty);
-  //   if (move !== null) {
-  //     const box = box_array[move];
-  //     box.current.innerHTML = `<img src='${circle_icon}'/>`;
-  //     data[move] = "o";
-  //     setCount(1);
-  //   }
-  // }
   return (
     <div className="container">
       <button type="button" className="back hover">
@@ -140,7 +130,7 @@ const TicTacToe = () => {
           Back
         </Link>
       </button>
-      <h1 className="title" ref={titleRef}>
+      <h1 className="title visually-hidden" ref={titleRef}>
         Tic Tac Toe Game in <span>React</span>
       </h1>
       <div>

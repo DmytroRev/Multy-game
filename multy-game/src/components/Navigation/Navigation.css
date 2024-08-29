@@ -1,0 +1,68 @@
+.card {
+    width: 180px;
+    height: 180px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.212);
+    background: #16262d;
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    position: relative;
+    transition: all 0.4s;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.card-link {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+.card-content {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #26ffcb;
+    font-weight: 500;
+    font-size: 0.9em;
+    letter-spacing: 0.2em;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.card:hover .card-content {
+    opacity: 1;
+}
+
+.card div {
+    width: 180px;
+    height: 180px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.212);
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.4s;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+}
+
+.card:hover div {
+    transform: translateY(-20px);
+}
+
+.tictactoe-logo {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 9px;
+}
