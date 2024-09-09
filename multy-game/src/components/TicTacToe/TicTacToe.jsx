@@ -1,10 +1,13 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { toast } from "react-hot-toast";
 import circle_icon from "../../img/circle.png";
 import cross_icon from "../../img/cross.png";
 import "./TicTacToe.css";
 import { Link } from "react-router-dom";
 import AiOrUser from "./AiOrUser/AiOrUser";
 import ComputerPlayer from "./ComputerPlayer/ComputerPlayer";
+import { GrPowerReset } from "react-icons/gr";
+import { IoArrowBack } from "react-icons/io5";
 
 let data = ["", "", "", "", "", "", "", "", ""];
 
@@ -16,22 +19,21 @@ const TicTacToe = () => {
   let [firstMove, setFirstMove] = useState("player");
   let [crossWins, setCrossWins] = useState(0);
   let [circleWins, setCircleWins] = useState(0);
-
-  let titleRef = useRef(null);
-  let box1 = useRef(null);
-  let box2 = useRef(null);
-  let box3 = useRef(null);
-  let box4 = useRef(null);
-  let box5 = useRef(null);
-  let box6 = useRef(null);
-  let box7 = useRef(null);
-  let box8 = useRef(null);
-  let box9 = useRef(null);
   const backToPage = useRef(location.state ?? "/");
+  const box1 = useRef(null);
+  const box2 = useRef(null);
+  const box3 = useRef(null);
+  const box4 = useRef(null);
+  const box5 = useRef(null);
+  const box6 = useRef(null);
+  const box7 = useRef(null);
+  const box8 = useRef(null);
+  const box9 = useRef(null);
   const box_array = useMemo(
     () => [box1, box2, box3, box4, box5, box6, box7, box8, box9],
     []
   );
+
   const checkWin = useCallback(() => {
     if (data[0] === data[1] && data[1] === data[2] && data[2] !== "") {
       won(data[2]);
@@ -49,8 +51,13 @@ const TicTacToe = () => {
       won(data[8]);
     } else if (data[2] === data[4] && data[4] === data[6] && data[6] !== "") {
       won(data[6]);
+    } else if (!data.includes("") && !lock) {
+      toast.custom(() => <div className="toast">Ничья 🤝</div>, {
+        duration: 3000,
+      });
     }
-  }, []);
+  }, [lock]);
+
   useEffect(() => {
     if (gameMode === "computer" && count % 2 === 1 && !lock) {
       const timeoutId = setTimeout(() => {
@@ -82,6 +89,7 @@ const TicTacToe = () => {
       return () => clearTimeout(timeoutId);
     }
   }, [gameMode, count, difficulty, box_array, checkWin, firstMove]);
+
   const toggle = (e, num) => {
     if (lock || (gameMode === "computer" && count % 2 === 1)) {
       return;
@@ -106,11 +114,39 @@ const TicTacToe = () => {
   const won = (winner) => {
     setLock(true);
     if (winner === "x") {
-      titleRef.current.innerHTML = `Congrulatulations: <img src='${cross_icon}'/> wins`;
       setCrossWins((prevCount) => prevCount + 1);
+      toast.custom(
+        () => (
+          <div className="toast">
+            Победил
+            <img
+              src={cross_icon}
+              alt="Cross"
+              style={{ width: "24px", height: "24px" }}
+            />
+          </div>
+        ),
+        {
+          duration: 3000,
+        }
+      );
     } else {
       setCircleWins((prevCount) => prevCount + 1);
-      titleRef.current.innerHTML = `Congrulatulations: <img src='${circle_icon}'/> wins`;
+      toast.custom(
+        () => (
+          <div className="toast">
+            Победил
+            <img
+              src={circle_icon}
+              alt="Circle"
+              style={{ width: "24px", height: "24px" }}
+            />
+          </div>
+        ),
+        {
+          duration: 3000,
+        }
+      );
     }
   };
 
@@ -118,7 +154,6 @@ const TicTacToe = () => {
     setLock(false);
     data = ["", "", "", "", "", "", "", "", ""];
     setCount(0);
-    titleRef.current.innerHTML = "Tic Tac Toe in <span>React</span>";
 
     box_array.forEach((box) => {
       if (box.current) {
@@ -131,12 +166,13 @@ const TicTacToe = () => {
     <div className="container">
       <button type="button" className="back hover">
         <Link to={backToPage.current} className="link">
-          Back
+          <IoArrowBack className="iconBack" />
         </Link>
       </button>
-      <h1 className="title visually-hidden" ref={titleRef}>
+      <h1 className="title visually-hidden">
         Tic Tac Toe Game in <span>React</span>
       </h1>
+
       <div>
         <AiOrUser
           gameMode={gameMode}
@@ -154,74 +190,76 @@ const TicTacToe = () => {
           <span className="line"></span>
           <p className="count">{crossWins}</p>
         </div>
-        <div className="row1">
-          <div
-            className="boxes"
-            ref={box1}
-            onClick={(e) => {
-              toggle(e, 0);
-            }}
-          ></div>
-          <div
-            className="boxes"
-            ref={box2}
-            onClick={(e) => {
-              toggle(e, 1);
-            }}
-          ></div>
-          <div
-            className="boxes"
-            ref={box3}
-            onClick={(e) => {
-              toggle(e, 2);
-            }}
-          ></div>
-        </div>
-        <div className="row2">
-          <div
-            className="boxes"
-            ref={box4}
-            onClick={(e) => {
-              toggle(e, 3);
-            }}
-          ></div>
-          <div
-            className="boxes"
-            ref={box5}
-            onClick={(e) => {
-              toggle(e, 4);
-            }}
-          ></div>
-          <div
-            className="boxes"
-            ref={box6}
-            onClick={(e) => {
-              toggle(e, 5);
-            }}
-          ></div>
-        </div>
-        <div className="row3">
-          <div
-            className="boxes"
-            ref={box7}
-            onClick={(e) => {
-              toggle(e, 6);
-            }}
-          ></div>
-          <div
-            className="boxes"
-            ref={box8}
-            onClick={(e) => {
-              toggle(e, 7);
-            }}
-          ></div>
-          <div
-            className="boxes"
-            ref={box9}
-            onClick={(e) => {
-              toggle(e, 8);
-            }}
-          ></div>
+        <div className="containerForBox">
+          <div className="row1">
+            <div
+              className="boxes"
+              ref={box1}
+              onClick={(e) => {
+                toggle(e, 0);
+              }}
+            ></div>
+            <div
+              className="boxes"
+              ref={box2}
+              onClick={(e) => {
+                toggle(e, 1);
+              }}
+            ></div>
+            <div
+              className="boxes"
+              ref={box3}
+              onClick={(e) => {
+                toggle(e, 2);
+              }}
+            ></div>
+          </div>
+          <div className="row2">
+            <div
+              className="boxes"
+              ref={box4}
+              onClick={(e) => {
+                toggle(e, 3);
+              }}
+            ></div>
+            <div
+              className="boxes"
+              ref={box5}
+              onClick={(e) => {
+                toggle(e, 4);
+              }}
+            ></div>
+            <div
+              className="boxes"
+              ref={box6}
+              onClick={(e) => {
+                toggle(e, 5);
+              }}
+            ></div>
+          </div>
+          <div className="row3">
+            <div
+              className="boxes"
+              ref={box7}
+              onClick={(e) => {
+                toggle(e, 6);
+              }}
+            ></div>
+            <div
+              className="boxes"
+              ref={box8}
+              onClick={(e) => {
+                toggle(e, 7);
+              }}
+            ></div>
+            <div
+              className="boxes"
+              ref={box9}
+              onClick={(e) => {
+                toggle(e, 8);
+              }}
+            ></div>
+          </div>
         </div>
         <div className="container-for-count circle">
           <img src={circle_icon} className="img-cross-contain" />
@@ -229,16 +267,16 @@ const TicTacToe = () => {
           <p className="count">{circleWins}</p>
         </div>
       </div>
-
       <button
         className="reset hover"
         onClick={() => {
           reset();
         }}
       >
-        Reset
+        <GrPowerReset />
       </button>
     </div>
   );
 };
+
 export default TicTacToe;

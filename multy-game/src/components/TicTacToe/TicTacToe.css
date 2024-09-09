@@ -1,7 +1,7 @@
 
 .container {
     padding: 20px;
-    background-image: linear-gradient(rgba(46, 47, 66, 0.7), rgba(46, 47, 66, 0.7)),url(../../img/background.jpg);
+    background-image: linear-gradient(rgba(21, 21, 24, 0.7), rgba(24, 24, 27, 0.7)),url(../../img/background3.jpg);
                 background-repeat: no-repeat;
                     background-position: center;
                     background-size: cover;
@@ -9,14 +9,26 @@
 
 
 .back {
+        display: flex;
+            justify-content: center;
+            align-items: center;
     background-color: #1f3540;
             border: none;
-            width: 60px;
+            width: 50px;
             height: 30px;
-            border-radius: 40px;
+            border-radius: 50px;
             transition: color 0.3s, background-color 0.3s;
+ 
+                box-shadow: 0 0 10px rgba(38, 255, 203, 0.8);
 }
 
+
+.iconBack {
+
+    width: 20px;
+    height: 20px;
+    
+}
 
 
 .link {
@@ -68,7 +80,10 @@ background: linear-gradient(rgba(0, 0, 0, 0.1),
     /* background: #2a2a2a; */
 }
 
+.containerForBox {
+    display: flex;
 
+}
 
 .cross {
 margin-top: 165px;
@@ -102,7 +117,7 @@ margin-left: 30px;
 }
 
 .reset {
-    width: 150px;
+    width: 60px;
     height: 60px;
     border: none;
     outline: none;
@@ -118,6 +133,11 @@ justify-content: center;
 align-items: center;
 margin-right: auto;
 margin-left: auto;
+transition: color 0.3s, background-color 0.3s;
+    border: 1px solid #26ffcb;
+
+    box-shadow: 0 0 10px rgba(38, 255, 203, 0.8);
+
 }
 
 .boxes {
@@ -129,6 +149,10 @@ margin-left: auto;
     border-radius: 12px;
     cursor: pointer;
     transition: color 0.3s, background-color 0.3s;
+            border: 1px solid #26ffcb;
+             
+                box-shadow: 0 0 10px rgba(38, 255, 203, 0.8);
+                border-radius: 10px;
 }
 
 .boxes:hover{
@@ -151,3 +175,23 @@ margin-left: auto;
 height: 50px;
 }
 
+
+.toast {
+        display: flex;
+                    gap: 10px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.toast img {
+    vertical-align: middle;
+
+}
+
+.toast .message {
+    display: inline;
+}
