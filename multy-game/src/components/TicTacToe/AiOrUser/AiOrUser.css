@@ -25,6 +25,10 @@ gap: 20px;
 .mode-button,
 .difficulty-button,
 .first-move-button {
+    font-family: "Montserrat", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-size: 14px;
     padding: 10px 20px;
     border: none;
     background-color: #ddd;
@@ -54,6 +58,10 @@ background-color: #2b4c5a;
 }
 
 .first-move-btn {
+    font-family: "Montserrat", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-size: 14px;
     padding: 7.4px 20px;
     border: 2px solid #ccc;
     border-radius: 5px;
@@ -64,6 +72,7 @@ background-color: #2b4c5a;
 }
 
 .first-move-btn.selected {
+    
     border-color: #1f3540;
     background-color: #1f3540;
     color: #26ffcb;

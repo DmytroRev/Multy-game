@@ -19,16 +19,16 @@
 
 
 .back {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 35px;
-        height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
     background-color: transparent;
-            border: none;
-            border-radius: 50%;
-            transition: color 0.3s, background-color 0.3s;
-                box-shadow: 0 0 10px rgba(38, 255, 203, 0.8);
+    border: none;
+    border-radius: 50%;
+    transition: color 0.3s, background-color 0.3s;
+    box-shadow: 0 0 10px rgba(38, 255, 203, 0.8), inset 0 0 5px rgba(38, 255, 203, 0.8);
 }
 
 

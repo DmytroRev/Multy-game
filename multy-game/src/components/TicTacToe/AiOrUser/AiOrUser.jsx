@@ -17,7 +17,7 @@ const AiOrUser = ({
   return (
     <div className="select-mode">
       <div>
-        <h2 className="title-ai">Select Game Mode</h2>
+        <h2 className="title-ai">Обери режим гри</h2>
         {/* <Box>
         <FormControl fullWidth>
           <InputLabel variant="standard" htmlFor="uncontrolled-native">
@@ -37,13 +37,13 @@ const AiOrUser = ({
             className={clsx("mode-button", { active: gameMode === "human" })}
             onClick={() => setGameMode("human")}
           >
-            Human vs Human
+            Гравець
           </button>
           <button
             className={clsx("mode-button", { active: gameMode === "computer" })}
             onClick={() => setGameMode("computer")}
           >
-            Human vs Computer
+            Комп’ютер
           </button>
         </div>
       </div>
@@ -51,7 +51,7 @@ const AiOrUser = ({
       {gameMode === "computer" && (
         <>
           <div>
-            <h2 className="title-ai">Select Difficulty</h2>
+            <h2 className="title-ai">Обери складність</h2>
             <div className="button-group ">
               <button
                 className={clsx("difficulty-button", {
@@ -59,7 +59,7 @@ const AiOrUser = ({
                 })}
                 onClick={() => setDifficulty("easy")}
               >
-                Easy
+                Легко
               </button>
               <button
                 className={clsx("difficulty-button", {
@@ -67,7 +67,7 @@ const AiOrUser = ({
                 })}
                 onClick={() => setDifficulty("medium")}
               >
-                Medium
+                Середньо
               </button>
               <button
                 className={clsx("difficulty-button", {
@@ -75,7 +75,7 @@ const AiOrUser = ({
                 })}
                 onClick={() => setDifficulty("hard")}
               >
-                Hard
+                Важко
               </button>
             </div>
           </div>
@@ -83,7 +83,7 @@ const AiOrUser = ({
       )}
       {gameMode === "computer" && (
         <div>
-          <h2 className="title-ai">Who goes first?</h2>
+          <h2 className="title-ai">Хто починає перший?</h2>
           <div className="div">
             <button
               className={clsx("first-move-btn", {
@@ -91,7 +91,7 @@ const AiOrUser = ({
               })}
               onClick={() => setFirstMove("player")}
             >
-              Player
+              Гравець
             </button>
             <button
               className={clsx("first-move-btn", {
@@ -99,7 +99,7 @@ const AiOrUser = ({
               })}
               onClick={() => setFirstMove("computer")}
             >
-              Computer
+              Компьютер
             </button>
           </div>
         </div>
