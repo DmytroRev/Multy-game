@@ -1,9 +1,15 @@
+:root {
+    --background-color: #123;
+    /* Значение по умолчанию */
+}
+
 ul {
     list-style-type: none;
 }
 body {
     margin: 0;
 background: #0f1b21;
+/* background: var(#0f1b21); */
 }
 h1 {
     margin: 0;

@@ -1,11 +1,15 @@
 import { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import HomePage from "../../pages/HomePage/HomePage";
 import TicTacToePage from "../../pages/TicTacToe/TicTacToePage";
 import { Toaster } from "react-hot-toast";
+
 export default function App() {
+  const location = useLocation();
+  const isTicTacToePage = location.pathname === "/ticTacToe";
+
   return (
-    <div>
+    <div className={isTicTacToePage ? "tic-tac-toe-page" : ""}>
       <Toaster />
       <Suspense fallback={<p>Loading page...</p>}>
         <Routes>

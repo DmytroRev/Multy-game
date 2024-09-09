@@ -1,40 +1,48 @@
 
 .container {
-    padding: 20px;
-    background-image: linear-gradient(rgba(21, 21, 24, 0.7), rgba(24, 24, 27, 0.7)),url(../../img/background3.jpg);
+
+    background-color: #123;
+        /* Цвет фона */
+        padding: 20px;
+
+        color: white;
+        /* Цвет текста */
+        text-align: center;
+        width: 400px;
+        margin: 0 auto;
+        z-index: 2;
+    /* background-image: linear-gradient(rgba(21, 21, 24, 0.7), rgba(24, 24, 27, 0.7)),url(../../img/background3.jpg);
                 background-repeat: no-repeat;
                     background-position: center;
-                    background-size: cover;
+                    background-size: cover; */
 }
 
 
 .back {
         display: flex;
-            justify-content: center;
-            align-items: center;
-    background-color: #1f3540;
+        justify-content: center;
+        align-items: center;
+        width: 35px;
+        height: 35px;
+    background-color: transparent;
             border: none;
-            width: 50px;
-            height: 30px;
-            border-radius: 50px;
+            border-radius: 50%;
             transition: color 0.3s, background-color 0.3s;
- 
                 box-shadow: 0 0 10px rgba(38, 255, 203, 0.8);
 }
 
 
 .iconBack {
-
     width: 20px;
     height: 20px;
-    
 }
 
 
 .link {
+    display: flex;
 text-decoration: none;
             color: #26ffcb;
-            padding: 10px;
+padding: 10px;
 }
 
 
@@ -62,37 +70,31 @@ text-decoration: none;
 .container-for-count {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+
     width: 80px;
     height: 100px;
     padding: 10px;
-    justify-content: center;
     border: 1px solid #26ffcb;
-background: linear-gradient(rgba(0, 0, 0, 0.1),
-            /* Очень светлый затемняющий градиент */
-            rgba(0, 0, 0, 0.1)
-            /* Очень светлый затемняющий градиент */
-        );
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
     box-shadow: 0 0 10px rgba(38, 255, 203, 0.8);
     border-radius: 20px;
     position: relative;
-    /* background: #2a2a2a; */
 }
 
 .containerForBox {
     display: flex;
-
+    justify-content: center;
+    /* Центрируем содержимое */
+    margin: 0 auto;
+    
 }
 
-.cross {
-margin-top: 165px;
-margin-right: 30px;
-}
-
+.cross,
 .circle {
-margin-top: 165px;
-margin-left: 30px;
+    margin: 0 30px;
+    /* Убедитесь, что отступы сбалансированы */
+    margin-top: auto;
+        margin-bottom: auto;
 }
 
 .img-cross-contain {
@@ -112,8 +114,13 @@ margin-left: 30px;
 }
 
 .count {
+    display: flex;
+    justify-content: center;
     color: #26ffcb;
-    height: 5px;
+    font-size: 24px;
+    margin: 0;
+    margin-top: 10px;
+    /* Убедитесь, что размер текста подходит */
 }
 
 .reset {
@@ -137,6 +144,17 @@ transition: color 0.3s, background-color 0.3s;
     border: 1px solid #26ffcb;
 
     box-shadow: 0 0 10px rgba(38, 255, 203, 0.8);
+
+}
+
+.icon {
+    display: inline-block;
+    transition: transform 0.5s ease-in-out;
+padding: 10px;
+}
+
+.icon:hover {
+    transform: rotate(360deg);
 
 }
 
@@ -194,4 +212,22 @@ height: 50px;
 
 .toast .message {
     display: inline;
+}
+
+.highlight {
+    background-color: lightblue;
+    /* Подсвечиваем победную линию */
+    transform: scale(1.05);
+    /* Немного увеличиваем ячейки */
+    
+}
+
+.winner-banner {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    border-radius: 8px;
 }
