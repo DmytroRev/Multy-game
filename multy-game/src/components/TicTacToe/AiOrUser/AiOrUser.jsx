@@ -1,8 +1,5 @@
 import PropTypes from "prop-types";
-// import Box from "@mui/material/Box";
-// import InputLabel from "@mui/material/InputLabel";
-// import FormControl from "@mui/material/FormControl";
-// import NativeSelect from "@mui/material/NativeSelect";
+
 import clsx from "clsx";
 import "./AiOrUser.css";
 
@@ -18,20 +15,6 @@ const AiOrUser = ({
     <div className="select-mode">
       <div>
         <h2 className="title-ai">Обери режим гри</h2>
-        {/* <Box>
-        <FormControl fullWidth>
-          <InputLabel variant="standard" htmlFor="uncontrolled-native">
-            Game Mode
-          </InputLabel>
-          <NativeSelect 
-            defaultValue={30}
-            onChange={(e) => setGameMode(e.target.value)}
-          >
-            <option value="human">Human vs Human</option>
-            <option value="computer">Human vs Computer</option>
-          </NativeSelect>
-        </FormControl>
-      </Box> */}
         <div className="button-group">
           <button
             className={clsx("mode-button", { active: gameMode === "human" })}

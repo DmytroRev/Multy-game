@@ -195,34 +195,87 @@ height: 50px;
 
 
 .toast {
-        display: flex;
-                    gap: 10px;
-    background-color: #333;
+position: fixed;
+    top: 330px;
+    left: 52%;
+    width: 120vw;
+    height: 120vh;
+    background-color: rgba(0, 0, 0, 0.8);
     color: #fff;
     border-radius: 8px;
-    padding: 10px;
-    font-size: 16px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    font-family: "Montserrat", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+    
+        font-size: 34px;
+        font-weight: 300;
+    text-align: center;
+    z-index: 999;
+    box-shadow: 0 0 30px rgba(38, 255, 203, 0.6), 0 0 60px rgba(38, 255, 203, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    animation: fadein 3s ease-out, fadeout 0s ease-in 3s forwards;
+display: flex;
+    align-items: center;
+    /* Центрирование по вертикали */
+    justify-content: center;
 }
 
-.toast img {
+@keyframes fadein {
+    0% {
+        opacity: 0;
+        visibility: visible;
+        pointer-events: none;
+        transform: translate(-50%, -50%) scale(0.9);
+        /* Начальное состояние с уменьшенным масштабом */
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+        pointer-events: auto;
+        /* Плавное увеличение до нормального размера */
+    }
+}
+
+@keyframes fadeout {
+    0% {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translate(-50%, -50%) scale(1);
+        /* Исходное состояние */
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translate(-50%, -50%) scale(0.9);
+        /* Исчезновение с небольшим уменьшением размера */
+    }
+}
+
+/* .toast img {
     vertical-align: middle;
 
 }
 
 .toast .message {
     display: inline;
-}
+} */
 
 .highlight {
-    background-color: lightblue;
-    /* Подсвечиваем победную линию */
-    transform: scale(1.05);
-    /* Немного увеличиваем ячейки */
-    
+    background-color: rgba(173, 216, 230, 0.5);
+    /* transform: scale(1.05); */
 }
 
-.winner-banner {
+.highlight:hover {
+background-color: rgba(173, 216, 230, 0.5);
+}
+/* .winner-banner {
     margin-top: 20px;
     padding: 10px;
     background-color: #333;
@@ -230,4 +283,4 @@ height: 50px;
     font-size: 1.5rem;
     text-align: center;
     border-radius: 8px;
-}
+} */

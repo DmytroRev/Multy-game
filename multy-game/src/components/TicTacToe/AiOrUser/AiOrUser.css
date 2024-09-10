@@ -25,6 +25,7 @@ gap: 20px;
 .mode-button,
 .difficulty-button,
 .first-move-button {
+    position: relative;
     font-family: "Montserrat", sans-serif;
         font-optical-sizing: auto;
         font-weight: 400;
@@ -37,6 +38,7 @@ gap: 20px;
     transition: bacground-color 0.3s, background-color 0.3s;
 }
 
+
 .mode-button.active,
 .difficulty-button.active,
 .first-move-button.active {
@@ -44,6 +46,26 @@ gap: 20px;
     color: #26ffcb;
     transition: bacground-color 0.3s, background-color 0.3s;
 }
+.mode-button.active::after,
+.difficulty-button.active::after,
+.first-move-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 90%;
+    height: 1px;
+    background-color: #26ffcb;
+transition: width 0.6s ease;
+}
+
+.mode-button.active::after,
+.difficulty-button.active::after,
+.first-move-button.active::after {
+    animation: lineExpand 0.6s forwards;
+    /* Анимация для кнопок с классом active */
+}
+
 
 .mode-button:hover,
 .difficulty-button:hover,
@@ -58,6 +80,7 @@ background-color: #2b4c5a;
 }
 
 .first-move-btn {
+        position: relative;
     font-family: "Montserrat", sans-serif;
         font-optical-sizing: auto;
         font-weight: 400;
@@ -72,12 +95,49 @@ background-color: #2b4c5a;
 }
 
 .first-move-btn.selected {
-    
+
     border-color: #1f3540;
     background-color: #1f3540;
     color: #26ffcb;
 }
 
-.box {
-    color: white;
+.first-move-btn.selected::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    /* Расстояние между кнопкой и линией */
+    left: 50%;
+    /* Начальная позиция линии в центре */
+    width: 0;
+    /* Начальная ширина линии */
+    height: 1px;
+    /* Толщина линии */
+    background-color: #26ffcb;
+    /* Цвет линии */
+    transform: translateX(-50%);
+    /* Центрирование линии */
+    transition: width 0.6s ease;
+    /* Плавная анимация ширины */
+    z-index: -1;
+    /* Убедитесь, что линия под кнопкой */
+}
+
+/* Анимация для линии под кнопками */
+@keyframes lineExpand {
+    from {
+        width: 0;
+        transform: translateX(-50%);
+        /* Начальная ширина линии */
+    }
+
+    to {
+        width: 90%;
+        transform: translateX(-50%);
+        /* Финальная ширина линии */
+    }
+}
+
+.first-move-btn.selected::after {
+    animation: lineExpand 0.6s forwards;
+    /* Анимация для линии */
 }

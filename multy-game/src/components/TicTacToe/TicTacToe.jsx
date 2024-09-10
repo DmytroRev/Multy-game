@@ -9,7 +9,6 @@ import AiOrUser from "./AiOrUser/AiOrUser";
 import ComputerPlayer from "./ComputerPlayer/ComputerPlayer";
 import { GrPowerReset } from "react-icons/gr";
 import { IoArrowBack } from "react-icons/io5";
-
 let data = ["", "", "", "", "", "", "", "", ""];
 
 const TicTacToe = () => {
@@ -39,7 +38,7 @@ const TicTacToe = () => {
 
   const checkWin = useCallback(() => {
     if (data[0] === data[1] && data[1] === data[2] && data[2] !== "") {
-      won(data[2], [0, 1, 2]); // Передаем индексы победной линии
+      won(data[2], [0, 1, 2]);
     } else if (data[3] === data[4] && data[4] === data[5] && data[5] !== "") {
       won(data[5], [3, 4, 5]);
     } else if (data[6] === data[7] && data[7] === data[8] && data[8] !== "") {
@@ -55,8 +54,8 @@ const TicTacToe = () => {
     } else if (data[2] === data[4] && data[4] === data[6] && data[6] !== "") {
       won(data[6], [2, 4, 6]);
     } else if (!data.includes("") && !lock) {
-      toast.custom(() => <div className="toast">Ничья 🤝</div>, {
-        duration: 3000,
+      toast.custom(() => <div className="toast">Нічия 🤝</div>, {
+        duration: 5000,
       });
     }
   }, [lock]); // Исключаем data из зависимостей
