@@ -21,6 +21,9 @@ export default function Navigation() {
             <span className="card-content">Play Game</span>
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/tetris">Tetris</NavLink>
+        </li>
       </ul>
     </div>
   );

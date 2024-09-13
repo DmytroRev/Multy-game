@@ -1,0 +1,11 @@
+.containerTetrisGame {
+    display: flex;
+    gap: 40px;
+}
+
+.sidePanel {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    /* Расстояние между игровым полем и боковой панелью */
+}

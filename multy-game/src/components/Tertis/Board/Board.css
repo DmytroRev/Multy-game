@@ -1,0 +1,37 @@
+.boardTetris {
+    display: grid;
+    grid-template-rows: repeat(18, 35.375px);
+    /* Устанавливаем 18 строк по 35.375px */
+    grid-template-columns: repeat(10, 35.375px);
+    /* Устанавливаем 10 столбцов по 35.375px */
+    gap: 1px;
+    /* Пробел между ячейками */
+    background-color: black;
+    /* Цвет фона игрового поля */
+    width: calc(10 * 35.375px + 9px);
+    /* Ширина поля для 10 ячеек по 35.375px каждая плюс отступы (9px - 1px * 10 - 1px) */
+    height: calc(18 * 35.375px + 17px);
+    /* Высота поля для 18 ячеек по 35.375px каждая плюс отступы (17px - 1px * 18 - 1px) */
+}
+
+.row {
+    display: contents;
+    /* Позволяет строкам быть частью сетки */
+}
+
+.cell {
+    width: 35.375px;
+    /* Ширина ячейки */
+    height: 35.375px;
+    /* Высота ячейки */
+    background-color: #ccc;
+    /* Цвет ячейки по умолчанию */
+    border: 1px solid #555;
+    opacity: 0.3;
+    /* Цвет бордера ячейки (темнее) */
+}
+
+.cell.filled {
+    background-color: #333;
+    /* Цвет заполненной ячейки */
+}
